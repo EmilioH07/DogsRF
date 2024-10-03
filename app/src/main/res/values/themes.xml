@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.DogsRF" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+    <!-- You can add more styles if needed -->
+    <style name="Theme.DogsRF" parent="Base.Theme.DogsRF" />
+</resources>

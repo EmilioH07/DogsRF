@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">VideoGames RF</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="maps_api_key">fdlkjfdgljkfdgkljfdgkljfdglkj</string>
+    <string name="dailyfood">Comida diaria:</string>
+    <string name="life">Esperanza de vida:</string>
+    <string name="coatType">Tipo de pelo:</string>
+    <string name="Temperament">Temperamento:</string>
+    <string name="exercise">Ejercicio requerido:</string>
+    <string name="text">Selecciona para conocer un poco mas sobre esta raza</string>
+    <string name="Title">Title</string>
+    <string name="daily">Daily</string>
+    <string name="Life">Life</string>
+    <string name="Coat">Coat</string>
+    <string name="Temp">Temperamento</string>
+    <string name="Exercise">Exercise</string>
+    <string name="size">Tamaño:</string>
+    <string name="Size">Size</string>
+    <string name="log_id_received">Id recibido %1$d</string>
+</resources>

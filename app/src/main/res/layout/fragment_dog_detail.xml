@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#141A31"
+    tools:context=".ui.fragments.DogDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="25sp"
+                        tools:text="@string/Title" />
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/ivImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:paddingTop="5dp"
+                        app:riv_corner_radius="10dp"
+                        tools:src="@mipmap/ic_launcher" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="30dp">
+
+                        <TextView
+                            android:id="@+id/tvRightSize"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:text="@string/size" />
+
+                        <TextView
+                            android:id="@+id/tvSize"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            tools:text="@string/Size" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvRightDaily"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:text="@string/dailyfood" />
+
+                        <TextView
+                            android:id="@+id/tvDaily"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            tools:text="@string/daily" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvRightLife"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:text="@string/life" />
+
+                        <TextView
+                            android:id="@+id/tvLife"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            tools:text="@string/Life" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvRightCoat"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:text="@string/coatType" />
+
+                        <TextView
+                            android:id="@+id/tvCoat"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            tools:text="@string/Coat" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvRightTemperament"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:text="@string/Temperament" />
+
+                        <TextView
+                            android:id="@+id/tvTemperament"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            tools:text="@string/Temp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvRightExercise"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:text="@string/exercise" />
+
+                        <TextView
+                            android:id="@+id/tvExercise"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/ubuntu"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            tools:text="@string/Exercise" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:indeterminateDrawable="@drawable/loading_anim"
+                android:indeterminateDuration="1500"
+                />
+
+
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
