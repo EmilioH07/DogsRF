@@ -1,5 +1,6 @@
 package com.erha.dogsrf.ui.fragments
 
+import android.content.pm.ActivityInfo
 import android.graphics.text.LineBreaker
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +16,8 @@ import com.erha.dogsrf.data.DogRepository
 import com.erha.dogsrf.data.remote.model.DogDetailDto
 import com.erha.dogsrf.databinding.FragmentDogDetailBinding
 import com.erha.dogsrf.utils.Constants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -93,6 +96,16 @@ class DogDetailFragment : Fragment() {
 
                         tvExercise.text = response.body()?.exerciseneeds
 
+                        val videoId = response.body()?.video
+
+                        binding.ytpvVideo.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                            override fun onReady(youTubePlayer: YouTubePlayer) {
+                                val videoId = response.body()?.video
+                                if (videoId != null && videoId.isNotEmpty()) {
+                                    youTubePlayer.cueVideo(videoId, 0f)
+                                }
+                            }
+                        })
 
 
                     }
@@ -107,11 +120,21 @@ class DogDetailFragment : Fragment() {
 
             })
         }
+
+        lifecycle.addObserver(binding.ytpvVideo)
     }
+
+
+
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.ytpvVideo.release() // Liberar recursos del reproductor
     }
 
     companion object {

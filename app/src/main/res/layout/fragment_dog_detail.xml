@@ -31,6 +31,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -61,7 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="30dp">
+                        android:layout_marginTop="25dp">
 
                         <TextView
                             android:id="@+id/tvRightSize"
@@ -262,7 +263,17 @@
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             tools:text="@string/Exercise" />
+
                     </LinearLayout>
+
+                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                        android:id="@+id/ytpvVideo"
+                        android:layout_width="250dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center" />
+
+
+
 
                 </LinearLayout>
             </ScrollView>
@@ -279,6 +290,8 @@
 
 
         </RelativeLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

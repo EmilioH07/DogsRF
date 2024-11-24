@@ -29,5 +29,10 @@ class DogDetailDto (
     var temperament: String? = null,
 
     @SerializedName("exercise_needs")
-    var exerciseneeds: String? = null
+    var exerciseneeds: String? = null,
+
+    @SerializedName("video")
+    var video: String? = null,
+
+
 )

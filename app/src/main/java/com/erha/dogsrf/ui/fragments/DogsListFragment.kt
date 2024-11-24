@@ -1,5 +1,6 @@
 package com.erha.dogsrf.ui.fragments
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -63,6 +64,9 @@ class DogsListFragment : Fragment() {
                         binding.rvDogs.apply {
                             layoutManager = LinearLayoutManager(requireContext())
                             adapter = DogsAdapter(mutableDogsList) { dog ->
+                                // Reproducir audio
+                                playDogSound()
+
                                 // Acción al seleccionar un perro
                                 dog.id?.let { id ->
                                     requireActivity().supportFragmentManager.beginTransaction()
@@ -72,6 +76,7 @@ class DogsListFragment : Fragment() {
                                 }
                             }
                         }
+
 
                         // Ocultar la imagen de carga y mostrar el RecyclerView
                         binding.ivLoading.visibility = View.GONE
@@ -96,6 +101,17 @@ class DogsListFragment : Fragment() {
             }
         })
     }
+
+    private fun playDogSound() {
+        val mediaPlayer = MediaPlayer.create(requireContext(), R.raw.dog_bark)
+        mediaPlayer.start() // Reproduce el sonido
+
+        // Libera el recurso una vez que el audio finalice
+        mediaPlayer.setOnCompletionListener {
+            it.release()
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

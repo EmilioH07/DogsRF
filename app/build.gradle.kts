@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.erha.dogsrf"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.erha.dogsrf"
@@ -60,6 +60,8 @@ dependencies {
 
     //Para las corrutinas con alcance lifecycle
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    implementation(libs.core)
 
     //Imágenes con bordes redondeados
     implementation(libs.roundedimageview)
