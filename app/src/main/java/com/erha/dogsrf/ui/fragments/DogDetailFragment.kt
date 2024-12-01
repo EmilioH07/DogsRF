@@ -16,30 +16,35 @@ import com.erha.dogsrf.data.DogRepository
 import com.erha.dogsrf.data.remote.model.DogDetailDto
 import com.erha.dogsrf.databinding.FragmentDogDetailBinding
 import com.erha.dogsrf.utils.Constants
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 
 private const val GAME_ID = "game_id"
 
-class DogDetailFragment : Fragment() {
+class DogDetailFragment : Fragment(), OnMapReadyCallback {
 
     private var gameId: String? = null
-
     private var _binding: FragmentDogDetailBinding? = null
-    private val binding get()  = _binding!!
-
+    private val binding get() = _binding!!
     private lateinit var repository: DogRepository
+    private var mMap: GoogleMap? = null  // Mapa ahora puede ser nulo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { args ->
             gameId = args.getString(GAME_ID)
             Log.d(Constants.LOGTAG, getString(R.string.log_id_received))
-
         }
     }
 
@@ -51,50 +56,33 @@ class DogDetailFragment : Fragment() {
         return binding.root
     }
 
-    //Se manda llamar ya cuando el fragment es visible en pantalla
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Obteniendo la instancia al repositorio
+        // Inicializar el repositorio
         repository = (requireActivity().application as DogsRFApp).repository
 
-        gameId?.let{ id ->
-            //Hago la llamada al endpoint para consumir los detalles del juego
+        // Obtener la instancia del mapa
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this) // Llamamos al callback onMapReady
 
-            //val call: Call<GameDetailDto> = repository.getGameDetail(id)
-
-            //Para apiary
+        gameId?.let { id ->
             val call: Call<DogDetailDto> = repository.getDogDetail(id)
 
-            call.enqueue(object: Callback<DogDetailDto> {
+            call.enqueue(object : Callback<DogDetailDto> {
                 override fun onResponse(p0: Call<DogDetailDto>, response: Response<DogDetailDto>) {
-
                     binding.apply {
                         pbLoading.visibility = View.GONE
+                        val dog = response.body()
 
-                        //Aquí utilizamos la respuesta exitosa y asignamos los valores a las vistas
-                        tvTitle.text = response.body()?.title
-
-                        Glide.with(requireActivity())
-                            .load(response.body()?.image)
-                            .into(ivImage)
-
-                        /*Picasso.get()
-                            .load(response.body()?.image)
-                            .into(ivImage)*/
-
-
-                        tvSize.text = response.body()?.size
-
-                        tvDaily.text = response.body()?.dailyfood
-
-                        tvLife.text = response.body()?.lifeexpectancy
-
-                        tvCoat.text = response.body()?.coattype
-
-                        tvTemperament.text = response.body()?.temperament
-
-                        tvExercise.text = response.body()?.exerciseneeds
+                        tvTitle.text = dog?.title
+                        Glide.with(requireActivity()).load(dog?.image).into(ivImage)
+                        tvSize.text = dog?.size
+                        tvDaily.text = dog?.dailyfood
+                        tvLife.text = dog?.lifeexpectancy
+                        tvCoat.text = dog?.coattype
+                        tvTemperament.text = dog?.temperament
+                        tvExercise.text = dog?.exerciseneeds
 
                         val videoId = response.body()?.video
 
@@ -107,25 +95,37 @@ class DogDetailFragment : Fragment() {
                             }
                         })
 
-
+                        // Si tenemos latitud y longitud, colocamos el marcador en el mapa
+                        dog?.latitud?.toDoubleOrNull()?.let { lat ->
+                            dog.longitud?.toDoubleOrNull()?.let { lng ->
+                                // Solo agregamos el marcador si el mapa ya está listo
+                                if (mMap != null) {
+                                    try {
+                                        val location = LatLng(lat, lng)
+                                        mMap?.addMarker(MarkerOptions().position(location).title(dog.title))
+                                        mMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 13f))
+                                    } catch (e: Exception) {
+                                        Log.e("DogDetailFragment", "Error al agregar el marcador: ${e.message}")
+                                    }
+                                } else {
+                                    Log.w("DogDetailFragment", "El mapa no está listo aún")
+                                }
+                            }
+                        }
                     }
-
-
-
                 }
 
                 override fun onFailure(p0: Call<DogDetailDto>, p1: Throwable) {
-                    //Manejo del error de conexión
+                    Log.e("DogDetailFragment", "Error en la respuesta: ${p1.message}")
                 }
-
             })
         }
-
-        lifecycle.addObserver(binding.ytpvVideo)
     }
 
-
-
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        mMap?.uiSettings?.isZoomControlsEnabled = true
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -147,3 +147,5 @@ class DogDetailFragment : Fragment() {
             }
     }
 }
+
+

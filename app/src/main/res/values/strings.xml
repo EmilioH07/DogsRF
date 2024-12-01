@@ -18,4 +18,5 @@
     <string name="size">Tamaño:</string>
     <string name="Size">Size</string>
     <string name="log_id_received">Id recibido %1$d</string>
+    <string name="criadero">Criadero para adopción</string>
 </resources>

@@ -34,5 +34,11 @@ class DogDetailDto (
     @SerializedName("video")
     var video: String? = null,
 
+    @SerializedName("latitud")
+    var latitud: String? = null,
+
+    @SerializedName("longitud")
+    var longitud: String? = null
+
 
 )

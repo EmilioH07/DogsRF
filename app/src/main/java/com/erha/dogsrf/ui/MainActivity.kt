@@ -1,6 +1,9 @@
 package com.erha.dogsrf.ui
 
+import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -8,10 +11,16 @@ import androidx.core.view.WindowInsetsCompat
 import com.erha.dogsrf.R
 import com.erha.dogsrf.databinding.ActivityMainBinding
 import com.erha.dogsrf.ui.fragments.DogsListFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var user: FirebaseUser? = null
+    private var userId: String? = null
 
     /*private lateinit var repository: GameRepository
     private lateinit var retrofit: Retrofit*/
@@ -22,7 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        //Mostramos el fragment inicial GamesListFragment
+
+        //Mostramos el fragment inicial DogsListFragment
         if(savedInstanceState == null){
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, DogsListFragment())
@@ -36,8 +46,18 @@ class MainActivity : AppCompatActivity() {
         //Obteniendo el repositorio
         repository = GameRepository(retrofit)*/
 
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        user = firebaseAuth.currentUser
+        userId = user?.uid
+
 
     }
+
+
+}
 
     /*fun click(view: View) {
 
@@ -61,4 +81,3 @@ class MainActivity : AppCompatActivity() {
 
         })
     }*/
-}

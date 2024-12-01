@@ -36,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+
                     <TextView
                         android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
@@ -229,6 +230,8 @@
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             tools:text="@string/Temp" />
+
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -264,6 +267,7 @@
                             android:textSize="20sp"
                             tools:text="@string/Exercise" />
 
+
                     </LinearLayout>
 
                     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -272,10 +276,28 @@
                         android:layout_height="150dp"
                         android:layout_gravity="center" />
 
+                    <TextView
+                        android:id="@+id/tvAdoptionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/criadero"
+                        android:textSize="20sp"
+                        android:padding="16dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/ubuntu_bold" />
 
+                    <fragment
+                        android:id="@+id/map"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="300dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="16dp" />
 
 
                 </LinearLayout>
+
             </ScrollView>
 
             <ProgressBar

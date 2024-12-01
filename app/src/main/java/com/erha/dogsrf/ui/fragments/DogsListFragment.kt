@@ -1,5 +1,6 @@
 package com.erha.dogsrf.ui.fragments
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.erha.dogsrf.R
 import com.erha.dogsrf.application.DogsRFApp
+import com.erha.dogsrf.authentication.LoginActivity
 import com.erha.dogsrf.data.DogRepository
 import com.erha.dogsrf.data.remote.model.DogDto
 import com.erha.dogsrf.databinding.FragmentDogsListBinding
@@ -17,6 +19,9 @@ import com.erha.dogsrf.ui.adapters.DogsAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+
 
 class DogsListFragment : Fragment() {
 
@@ -24,9 +29,13 @@ class DogsListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var repository: DogRepository
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Inicializar FirebaseAuth
+        firebaseAuth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -42,6 +51,14 @@ class DogsListFragment : Fragment() {
 
         // Obteniendo la instancia del repositorio
         repository = (requireActivity().application as DogsRFApp).repository
+
+        // Configurar FloatingActionButton para cerrar sesión
+        binding.fabLogout.setOnClickListener {
+            firebaseAuth.signOut() // Cierra la sesión de Firebase
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            Toast.makeText(requireContext(), "Sesión cerrada exitosamente", Toast.LENGTH_SHORT).show()
+            requireActivity().finish() // Cierra la actividad actual
+        }
 
         // Mostrar la imagen de carga
         binding.ivLoading.visibility = View.VISIBLE
@@ -77,7 +94,6 @@ class DogsListFragment : Fragment() {
                             }
                         }
 
-
                         // Ocultar la imagen de carga y mostrar el RecyclerView
                         binding.ivLoading.visibility = View.GONE
                         binding.rvDogs.visibility = View.VISIBLE
@@ -112,12 +128,12 @@ class DogsListFragment : Fragment() {
         }
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 }
+
 
 
 
